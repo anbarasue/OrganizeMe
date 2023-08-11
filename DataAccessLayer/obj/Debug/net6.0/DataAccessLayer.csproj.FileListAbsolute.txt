@@ -1,0 +1,14 @@
+C:\Users\vaibhav.shetty\Documents\GitHub\OrganizeMe\DataAccessLayer\bin\Debug\net6.0\DataAccessLayer.deps.json
+C:\Users\vaibhav.shetty\Documents\GitHub\OrganizeMe\DataAccessLayer\bin\Debug\net6.0\DataAccessLayer.runtimeconfig.json
+C:\Users\vaibhav.shetty\Documents\GitHub\OrganizeMe\DataAccessLayer\bin\Debug\net6.0\DataAccessLayer.dll
+C:\Users\vaibhav.shetty\Documents\GitHub\OrganizeMe\DataAccessLayer\bin\Debug\net6.0\DataAccessLayer.pdb
+C:\Users\vaibhav.shetty\Documents\GitHub\OrganizeMe\DataAccessLayer\obj\Debug\net6.0\DataAccessLayer.csproj.AssemblyReference.cache
+C:\Users\vaibhav.shetty\Documents\GitHub\OrganizeMe\DataAccessLayer\obj\Debug\net6.0\DataAccessLayer.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\vaibhav.shetty\Documents\GitHub\OrganizeMe\DataAccessLayer\obj\Debug\net6.0\DataAccessLayer.AssemblyInfoInputs.cache
+C:\Users\vaibhav.shetty\Documents\GitHub\OrganizeMe\DataAccessLayer\obj\Debug\net6.0\DataAccessLayer.AssemblyInfo.cs
+C:\Users\vaibhav.shetty\Documents\GitHub\OrganizeMe\DataAccessLayer\obj\Debug\net6.0\DataAccessLayer.csproj.CoreCompileInputs.cache
+C:\Users\vaibhav.shetty\Documents\GitHub\OrganizeMe\DataAccessLayer\obj\Debug\net6.0\DataAccessLayer.dll
+C:\Users\vaibhav.shetty\Documents\GitHub\OrganizeMe\DataAccessLayer\obj\Debug\net6.0\refint\DataAccessLayer.dll
+C:\Users\vaibhav.shetty\Documents\GitHub\OrganizeMe\DataAccessLayer\obj\Debug\net6.0\DataAccessLayer.pdb
+C:\Users\vaibhav.shetty\Documents\GitHub\OrganizeMe\DataAccessLayer\obj\Debug\net6.0\DataAccessLayer.genruntimeconfig.cache
+C:\Users\vaibhav.shetty\Documents\GitHub\OrganizeMe\DataAccessLayer\obj\Debug\net6.0\ref\DataAccessLayer.dll

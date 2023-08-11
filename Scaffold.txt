@@ -1,0 +1,187 @@
+dotnet ef dbcontext scaffold "Server=IDRSUC606658L;Database=OrganizeMeDB;Trusted_Connection=True;"  Microsoft.EntityFrameworkCore.SqlServer -o Models --force
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+using System;
+using System.Collections.Generic;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Metadata;
+
+namespace DataAccessLayer.Models
+{
+    public partial class OrganizeMeDBContext : DbContext
+    {
+        public OrganizeMeDBContext()
+        {
+        }
+
+        public OrganizeMeDBContext(DbContextOptions<OrganizeMeDBContext> options)
+            : base(options)
+        {
+        }
+
+        public virtual DbSet<Role> Roles { get; set; }
+        public virtual DbSet<Tasks> Tasks { get; set; }
+        public virtual DbSet<Task_Categories> Task_Categories { get; set; }
+        public virtual DbSet<Task_Groups> Task_Groups { get; set; }
+        public virtual DbSet<User> Users { get; set; }
+
+        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+        {
+            if (!optionsBuilder.IsConfigured)
+            {
+#warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see http://go.microsoft.com/fwlink/?LinkId=723263.
+                optionsBuilder.UseSqlServer("Server=IDRSUC606658L;Database=OrganizeMeDB;Trusted_Connection=True;");
+            }
+        }
+
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<Role>(entity =>
+            {
+                entity.HasIndex(e => e.RoleName, "uq_RoleName")
+                    .IsUnique();
+
+                entity.Property(e => e.RoleId).ValueGeneratedOnAdd();
+
+                entity.Property(e => e.RoleName)
+                    .HasMaxLength(20)
+                    .IsUnicode(false);
+            });
+
+            modelBuilder.Entity<Tasks>(entity =>
+            {
+                entity.HasIndex(e => e.TaskCategoryId, "ix_TaskCategoryId");
+
+                entity.HasIndex(e => e.TaskGroupId, "ix_TaskGroupId");
+
+                entity.Property(e => e.Created_at)
+                    .HasColumnType("datetime")
+                    .HasColumnName("Created_at")
+                    .HasDefaultValueSql("(getdate())");
+
+                entity.Property(e => e.Description)
+                    .HasMaxLength(100)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.Title)
+                    .IsRequired()
+                    .HasMaxLength(50)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.Updated_at)
+                    .HasColumnType("datetime")
+                    .HasColumnName("Updated_at")
+                    .HasDefaultValueSql("(getdate())");
+
+                entity.HasOne(d => d.Task_Categories)
+                    .WithMany(p => p.Tasks)
+                    .HasForeignKey(d => d.TaskCategoryId)
+                    .HasConstraintName("fk_TaskCategoryId");
+
+                entity.HasOne(d => d.Task_Groups)
+                    .WithMany(p => p.Tasks)
+                    .HasForeignKey(d => d.TaskGroupId)
+                    .HasConstraintName("fk_TaskGroupId");
+            });
+
+            modelBuilder.Entity<Task_Categories>(entity =>
+            {
+                entity.ToTable("Task_Categories");
+
+                entity.Property(e => e.TaskCategoryId).ValueGeneratedOnAdd();
+
+                entity.Property(e => e.TaskCategoryName)
+                    .IsRequired()
+                    .HasMaxLength(20)
+                    .IsUnicode(false);
+            });
+
+            modelBuilder.Entity<Task_Groups>(entity =>
+            {
+                entity.ToTable("Task_Groups");
+
+                entity.HasIndex(e => e.TaskGroupName, "uq_TaskGroupName")
+                    .IsUnique();
+
+                entity.Property(e => e.TaskGroupId).ValueGeneratedOnAdd();
+
+                entity.Property(e => e.TaskGroupName)
+                    .IsRequired()
+                    .HasMaxLength(20)
+                    .IsUnicode(false);
+            });
+
+            modelBuilder.Entity<User>(entity =>
+            {
+                entity.HasKey(e => e.EmailId)
+                    .HasName("pk_EmailId");
+
+                entity.HasIndex(e => e.RoleId, "ix_RoleId");
+
+                entity.Property(e => e.EmailId)
+                    .HasMaxLength(50)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.Address)
+                    .HasMaxLength(200)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.DateOfBirth).HasColumnType("date");
+
+                entity.Property(e => e.Gender)
+                    .IsRequired()
+                    .HasMaxLength(1)
+                    .IsUnicode(false)
+                    .IsFixedLength();
+
+                entity.Property(e => e.UserPassword)
+                    .IsRequired()
+                    .HasMaxLength(15)
+                    .IsUnicode(false);
+
+                entity.HasOne(d => d.Role)
+                    .WithMany(p => p.Users)
+                    .HasForeignKey(d => d.RoleId)
+                    .HasConstraintName("fk_RoleId");
+            });
+
+            OnModelCreatingPartial(modelBuilder);
+        }
+
+        partial void OnModelCreatingPartial(ModelBuilder modelBuilder);
+    }
+}
